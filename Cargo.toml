@@ -1,0 +1,28 @@
+[package]
+name = "rust-microservices"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tokio = { version = "1.35.1", features = ["macros", "rt-multi-thread"] }
+tonic = "0.10.2"
+prost = "0.12.3"
+uuid = { version = "1.7.0", features = ["v4"] }
+actix-web = "4.4.1"
+serde = { version = "1.0.196", features = ["derive"] }
+env_logger = "0.11.1"
+log = "0.4.20"
+dotenv = "0.15.0"
+
+[build-dependencies]
+tonic-build = "0.10.2"
+
+[[bin]]
+name = "todo-grpc-service"
+path = "src/bin/todo_grpc_service.rs"
+
+[[bin]]
+name = "todo-api"
+path = "src/bin/todo_api.rs"

@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  todo-api:
+    image: vtoman/todo-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: todo-api
+    depends_on:
+      - todo-grpc-service
+    ports:
+      - "8088:8088"
+    environment:
+      RUST_LOG: trace
+      HOST: 0.0.0.0
+      TODO_SERVICE_ENDPOINT: http://todo-grpc-service:54321
+  todo-grpc-service:
+    image: vtoman/todo-grpc-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: todo-grpc-service
+    environment:
+      RUST_LOG: trace
+      HOST: 0.0.0.0
+      PORT: 54321
